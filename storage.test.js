@@ -10,8 +10,8 @@ class FakeStorage {
 }
 
 globalThis.localStorage = new FakeStorage();
-const { STORAGE_KEYS } = await import('../src/domain.js');
-const { initStorage, taskRepository, sessionRepository, feedbackRepository } = await import('../src/storage.js');
+const { STORAGE_KEYS } = await import('./domain.js');
+const { initStorage, taskRepository, sessionRepository, feedbackRepository } = await import('./storage.js');
 
 test('storage initializes schema', () => {
   initStorage();

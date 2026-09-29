@@ -5,8 +5,8 @@ import {
   getTaskSuggestions,
   formatTime,
   rescueCategoryPrompt
-} from './src/domain.js';
-import { startTimer, getRemainingSeconds, getActualFocusSeconds, pauseSession, resumeSession } from './src/timer.js';
+} from './domain.js';
+import { startTimer, getRemainingSeconds, getActualFocusSeconds, pauseSession, resumeSession } from './timer.js';
 import {
   initStorage,
   taskRepository,
@@ -14,7 +14,7 @@ import {
   feedbackRepository,
   rescueRepository,
   clearAllData
-} from './src/storage.js';
+} from './storage.js';
 
 const app = document.getElementById('app');
 const overlay = document.getElementById('overlay-root');

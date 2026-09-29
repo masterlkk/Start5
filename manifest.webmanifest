@@ -1,8 +1,10 @@
 {
   "name": "先做5分钟",
   "short_name": "先做5分钟",
-  "description": "别想着做完，先做5分钟。",
-  "start_url": "./#/",
+  "description": "别想着做完，先做5分钟。一个帮助你开始任务的极简启动器。",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#f7f6f2",
   "theme_color": "#f7f6f2",
@@ -11,7 +13,7 @@
       "src": "./icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }

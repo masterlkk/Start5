@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { shouldBreakDown, getTaskSuggestions, formatTime } from '../src/domain.js';
-import { startTimer, getRemainingSeconds, getActualFocusSeconds, pauseSession, resumeSession } from '../src/timer.js';
+import { shouldBreakDown, getTaskSuggestions, formatTime } from './domain.js';
+import { startTimer, getRemainingSeconds, getActualFocusSeconds, pauseSession, resumeSession } from './timer.js';
 
 test('specific task does not require breakdown', () => {
   assert.equal(shouldBreakDown('回复老师邮件'), false);

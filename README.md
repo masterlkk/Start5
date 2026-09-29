@@ -1,90 +1,68 @@
-# 先做5分钟 — MVP V1
+# 先做5分钟 / Start5
 
-一个本地优先、零账号、零后端的极简任务启动器。
+一个帮助用户从“知道要做，但不想开始”切换到“先行动一点”的极简任务启动器。
 
-## 已实现
+## GitHub Pages 版
 
-- 普通启动：输入任务 → 5分钟
-- 大任务自动进入“任务缩小”
-- 5分钟时间戳倒计时
-- 暂停 / 恢复 / 提前结束
-- 切后台、锁屏后按真实时间推进
-- 页面刷新与重开恢复活动计时
-- 5分钟结束反馈：继续10分钟 / 今天先这样 / 卡住原因
-- 卡住后重新拆任务或再试2分钟
-- “我完全不想动”2分钟救急模式
-- Rescue → 普通5分钟
-- 今日启动次数（按 chainId 去重）
-- 简单历史记录与本周统计
-- LocalStorage 本地保存
-- Service Worker 离线缓存
-- 本地数据清除
-- 防重复 Feedback
-- 基础无障碍与移动端安全区
+本版本专门针对 GitHub Pages 做了扁平化处理：**所有运行文件都位于仓库根目录**，不依赖 `src/` 文件夹。
 
-## 运行
+核心运行文件：
 
-推荐通过本地 HTTP 服务运行，以启用 Service Worker：
+- `index.html`
+- `styles.css`
+- `app.js`
+- `domain.js`
+- `timer.js`
+- `storage.js`
+- `sw.js`
+- `manifest.webmanifest`
+- `icon.svg`
+
+## GitHub Pages 部署
+
+1. 把本目录中的所有文件上传到仓库根目录。
+2. 确认 `index.html` 和 `app.js` 在仓库首页直接可见。
+3. Repository → Settings → Pages。
+4. Source 选择 `Deploy from a branch`。
+5. Branch 选择 `main`，Folder 选择 `/(root)`。
+6. 保存并等待 Pages 构建完成。
+7. 访问：`https://<用户名>.github.io/<仓库名>/`
+
+例如：
+
+`https://masterlkk.github.io/Start5/`
+
+## 更新旧版本时的重要步骤
+
+如果此前已经访问过旧版本，请部署完成后：
+
+- 强制刷新：Mac `Command + Shift + R`
+- 或使用无痕窗口访问
+
+本版本的 Service Worker 缓存名已更新为 `start5-v1.1.0`，用于淘汰旧缓存。
+
+## 本地运行
+
+Mac/Linux：
 
 ```bash
-cd start5-mvp
 python3 -m http.server 4173
 ```
 
-浏览器打开：
+访问：
 
-```text
-http://localhost:4173
-```
+`http://localhost:4173/`
 
-也可以执行：
+也可以在 macOS 运行 `bash start.command`。
 
-```bash
-npm run serve
-```
+## 测试
 
-`npm run serve` 不需要安装第三方 npm 依赖，实际调用系统 Python。
-
-## 自动测试
+如果安装了 Node.js：
 
 ```bash
 npm test
 ```
 
-使用 Node 内置测试运行器，不需要安装依赖。
+## 隐私
 
-## 路由
-
-使用 Hash Router，静态托管和刷新时无需服务端 fallback：
-
-- `#/` 首页
-- `#/breakdown/:taskId` 任务缩小
-- `#/focus/:sessionId` 统一计时
-- `#/feedback/:sessionId` 结束反馈
-- `#/rescue` 2分钟救急模式
-- `#/history` 记录
-
-## 存储
-
-任务文本默认仅保存在浏览器 LocalStorage，不上传服务器。
-
-主要 key：
-
-- `sfm_tasks`
-- `sfm_focus_sessions`
-- `sfm_feedback`
-- `sfm_rescue_sessions`
-- `sfm_active_focus_session_id`
-- `sfm_active_rescue_session_id`
-- `sfm_schema_version`
-
-## 设计原则
-
-1. 任务不丢
-2. 计时不漂
-3. 刷新能恢复
-4. 用户始终知道下一步按什么
-
-## 当前技术形态
-
-本环境无法联网安装 Next.js 依赖，因此首个可运行版本使用原生 ES Modules 实现，完全零依赖。领域模型、Repository、Timer、路由和状态机按既定规格拆分，后续迁移至 Next.js / React 时可直接复用数据模型与业务规则。
+第一版不要求账号。任务文本与专注记录默认只保存在浏览器 LocalStorage 中，不会默认上传任务文本。
